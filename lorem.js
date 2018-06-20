@@ -27,21 +27,34 @@ function randomizeText (){
     var itemCount
     for (itemCount = 0; itemCount < element.length; itemCount++){
         var loremipsum = ""
-        var index = 0
+        var index
         //strlength is equal to the HTMLCollection.item's text content's word count, assuming words are seperated by spaces
         var strlength = element.item(itemCount).textContent.split(" ").length
         //generate a lorem ipsum string with variable length 
-        for (index; index<strlength; index++){
+        for (index = 0; index<strlength; index++){
             loremipsum = words[getRandomPosIntRange(rmin, rmax)] + " " + loremipsum 
         }
         //create new element of specified type, replace the previous element with new element (contains same word count)
         var newElement = document.createElement('p')
-        newElement.innerHTML = loremipsum
+        newElement.innerHTML = loremipsum.trim()
         element.item(itemCount).parentNode.replaceChild(newElement, element.item(itemCount))
     }
 }
 
-randomizeText();
+//Create button to toggle text randomization
+
+var button = document.createElement("button");
+button.innerHTML = "Obfuscate Text";
+
+//Append somewhere
+var body = document.getElementsByTagName("body")[0];
+body.appendChild(button);
+
+//Add event handler
+button.addEventListener ("click", function() {
+    randomizeText();
+});
+
 
 //console.log(loremipsum)
 
