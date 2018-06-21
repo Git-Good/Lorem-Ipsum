@@ -1,18 +1,17 @@
 //$(document).ready(() => {})
-//Create button to toggle text randomization
-
+//Create button for text randomization
 var button = document.createElement("button");
 button.innerHTML = "Obfuscate Text";
 
-//Append somewhere
+//Append 
 var body = document.getElementsByTagName("body")[0];
 body.appendChild(button);
 
 //Add event handler
 button.addEventListener ("click", function() {
     randomizeText();
+   
 });
-
 
 
 var tag = ""
@@ -27,13 +26,14 @@ document.addEventListener("dblclick", function (evt) {
     tag = elem.tagName.toLowerCase();
 
     console.log(typeof tag)
-   // $('#log').children('div').remove()
+    $('#log').children('div').remove()
             
-   // message = $('#log').append("<div id = 'annotation'>" +tag+ "</div>");    
+    message = $('#log').append("<div id = 'annotation'>" +tag+ "</div>");    
 
     //console.log(inspect)
-   // message.show();
-   // message.delay(1500).fadeOut(500);
+     message.show();
+    
+    // message.delay(1500).fadeOut(500);
     
     console.log(tag)
     element = document.getElementsByTagName(tag)
@@ -84,6 +84,8 @@ function randomizeText (){
         element.item(itemCount).parentNode.replaceChild(newElement, element.item(itemCount))
     }
 }
+
+
 
 
 
