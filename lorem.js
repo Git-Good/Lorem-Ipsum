@@ -1,4 +1,43 @@
 //$(document).ready(() => {})
+//Create button to toggle text randomization
+
+var button = document.createElement("button");
+button.innerHTML = "Obfuscate Text";
+
+//Append somewhere
+var body = document.getElementsByTagName("body")[0];
+body.appendChild(button);
+
+//Add event handler
+button.addEventListener ("click", function() {
+    randomizeText();
+});
+
+
+
+var tag = ""
+//select elements with specified tag
+var element = document.getElementsByTagName(tag)
+document.addEventListener("dblclick", function (evt) {
+    var elem
+    if (evt.srcElement)  elem = evt.srcElement;
+    else if (evt.target) elem = evt.target;
+
+    
+    tag = elem.tagName.toLowerCase();
+
+    console.log(typeof tag)
+   // $('#log').children('div').remove()
+            
+   // message = $('#log').append("<div id = 'annotation'>" +tag+ "</div>");    
+
+    //console.log(inspect)
+   // message.show();
+   // message.delay(1500).fadeOut(500);
+    
+    console.log(tag)
+    element = document.getElementsByTagName(tag)
+})
 
 
 //lorem ipsum dictionary (all words)
@@ -14,20 +53,25 @@ function getRandomPosIntRange(min, max) {
 
 //console.log(getRandomPosIntRange(rmin, rmax));
 
-//select elements with specified tag
-var element = document.getElementsByTagName("p")
+
 /*
 function wordCount(str) { 
     return str.split(" ").length;
   }
 
-console.log(element.item(0).textContent)
-*/
+console.log(element.item(0).textContent)*/
+
+//global variable to store previous text
+var storage = []
+
 function randomizeText (){
-    var itemCount
+    console.log(element.item(0).textContent)
+    var itemCount 
     for (itemCount = 0; itemCount < element.length; itemCount++){
         var loremipsum = ""
         var index
+        //Store previous text in array
+        storage[itemCount] = element.item(itemCount).textContent
         //strlength is equal to the HTMLCollection.item's text content's word count, assuming words are seperated by spaces
         var strlength = element.item(itemCount).textContent.split(" ").length
         //generate a lorem ipsum string with variable length 
@@ -35,25 +79,12 @@ function randomizeText (){
             loremipsum = words[getRandomPosIntRange(rmin, rmax)] + " " + loremipsum 
         }
         //create new element of specified type, replace the previous element with new element (contains same word count)
-        var newElement = document.createElement('p')
+        var newElement = document.createElement(tag)
         newElement.innerHTML = loremipsum.trim()
         element.item(itemCount).parentNode.replaceChild(newElement, element.item(itemCount))
     }
 }
 
-//Create button to toggle text randomization
-
-var button = document.createElement("button");
-button.innerHTML = "Obfuscate Text";
-
-//Append somewhere
-var body = document.getElementsByTagName("body")[0];
-body.appendChild(button);
-
-//Add event handler
-button.addEventListener ("click", function() {
-    randomizeText();
-});
 
 
 //console.log(loremipsum)
